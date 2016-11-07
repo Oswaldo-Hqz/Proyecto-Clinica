@@ -1,0 +1,6 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    RewriteCond %{SCRIPT_FILENAME} !-d  
+	RewriteCond %{SCRIPT_FILENAME} !-f  	
+    RewriteRule ^home/?$ index.php [QSA,L]
+ </IfModule>

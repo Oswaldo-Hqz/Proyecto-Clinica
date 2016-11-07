@@ -1,0 +1,44 @@
+create database clinic;
+use clinic;
+
+create table usuarios(
+    codigoUsuario varchar(5),
+    nombres varchar(60),
+    apellidos varchar(60),
+    correo varchar(50),
+    passw varchar(255),
+    telefono varchar(15),
+    direccion varchar(255),
+    turnoId int,
+    tipoUsuarioId int
+    )
+
+ create table TipoUsuarios( 
+    tipoUsuarioId int, 
+    tipo varchar(50) 
+    )
+
+create table Turnos (
+	turnoid int NOT NULL,
+	detalleturnoid int,
+	lunes bool,
+	martes bool,
+	miercoles bool,
+	jueves bool,
+	viernes bool,
+	sabado bool,
+	domingo bool,
+	maniana bool,
+	tarde bool
+);
+
+create table DetalleTurnos(
+	detalleturnoid int NOT NULL,
+	nombreturno varchar(50),
+	horario time    
+)
+
+create table TipoSangre (
+   tipoSangreID int not null,
+   GrupoSanguineo varchar(8) 
+    )
