@@ -12,3 +12,33 @@ create table usuarios(
     turnoId int,
     tipoUsuarioId int
     )
+
+ create table TipoUsuarios( 
+    tipoUsuarioId int, 
+    tipo varchar(50) 
+    )
+
+create table Turnos (
+	turnoid int NOT NULL,
+	detalleturnoid int,
+	lunes bool,
+	martes bool,
+	miercoles bool,
+	jueves bool,
+	viernes bool,
+	sabado bool,
+	domingo bool,
+	maniana bool,
+	tarde bool
+);
+
+create table DetalleTurnos(
+	detalleturnoid int NOT NULL,
+	nombreturno varchar(50),
+	horario time    
+)
+
+create table TipoSangre (
+   tipoSangreID int not null,
+   GrupoSanguineo varchar(8) 
+    )

@@ -1030,7 +1030,7 @@ ul.nav li a span {
     left: 0;
     width: 200px;
     z-index: 100;
-    background: #8BC34A;
+    background: url(../images/3.jpg) no-repeat 0px;
     border-bottom: 1px solid #303B4D;
     text-align: center;
     padding:0.55em 0 1em;

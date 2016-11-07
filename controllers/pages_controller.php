@@ -1,8 +1,9 @@
 <?php
   class PagesController {
     public function home() {
-      $first_name = 'Jon';
-      $last_name  = 'Snow';
+      $tiposU = Pages::tipos();
+      $turnos = Pages::turnos();
+      $horarios = Pages::Horarios();
       require_once('views/pages/home.php');
     }
 

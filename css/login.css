@@ -2,12 +2,12 @@
  * Specific styles of signin component
  */
 /*
- * General styles
+ * General styles  linear-gradient(rgb(255, 255, 255), rgb(189, 189, 189))
  */
 body, html {
     height: Auto;
     background-repeat: no-repeat;
-    background-image: linear-gradient(rgb(255, 255, 255), rgb(224, 150, 20));
+    background-image: linear-gradient(to top right, #ff7473, #ffc952);
     background-attachment: fixed;
 }
 

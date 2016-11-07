@@ -1,28 +1,23 @@
 <?php
   
   function call($controller, $action) {
-    // require the file that matches the controller name
+    // requiere el archivo que coincide con el nombre de controller
     require_once('controllers/' . $controller . '_controller.php');
 
-    // create a new instance of the needed controller
+    // crea una nueva instancia del controller necesario
     switch($controller) {
       case 'pages':
+        require_once('models/pages.php');
         $controller = new PagesController();
       break;
-      case 'posts':
-        // we need the model to query the database later in the controller
+      case 'posts':        
         require_once('models/post.php');
         $controller = new PostsController();
       break;
-
-    }
-
-    // call the action
+    }    
     $controller->{ $action }();
   }
-
-  // just a list of the controllers we have and their actions
-  // we consider those "allowed" values
+  // Lista de controllers que tenemos y los actions respectivos  
   $controllers = array('pages' => ['home', 'error'],
                        'posts' => ['index', 'show']);
 
