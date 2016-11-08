@@ -88,7 +88,19 @@
       $Catidad++;
       $db->query("INSERT INTO tipousuarios(tipoUsuarioId, tipo) VALUES ('$Catidad','$Nombre')");
     } 
+
+    public static function ingresarEspecialidad($Nombre,$descripcion){
+      $db = Db::getInstance();
+      $result = $db->query('SELECT count(*) FROM especialidades');
+      $valor = $result->fetch();
+      $Catidad = $valor[0];
+      $Catidad++;
+      $db->query("INSERT INTO especialidades(especialidadID, nombre, descripcion) VALUES ('$Catidad','$Nombre','$descripcion')");
+    }
   }
+
+
+
   class ObtenerUsuario {
     public $codigoUsuario;
     public $nombres;

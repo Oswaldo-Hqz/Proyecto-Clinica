@@ -75,7 +75,16 @@
 		$nombreTipo = htmlspecialchars($nombreTipo);
 		Pages::ingresarTipoUser($nombreTipo);
 	}
-	
+	if (isset($_POST['EnviarEspecial'])) {
+		$nombreEsp = trim($_POST['nombreEspecialidad']);
+	  	$nombreEsp = strip_tags($nombreEsp);
+		$nombreEsp = htmlspecialchars($nombreEsp);
+
+		$Descripcion = trim($_POST['Descripcion']);
+	  	$Descripcion = strip_tags($Descripcion);
+		$Descripcion = htmlspecialchars($Descripcion);
+		Pages::ingresarEspecialidad($nombreEsp,$Descripcion);
+	}
 ?>
 
 
@@ -331,9 +340,78 @@
 </div>
 <!-- END MODAL CREAR NUEVO TIPO USUARIO -->
 
+<!-- MODAL AGREGAR ESPECIALIDAD USUARIO-->
+<div id="ModalNuevaEspecialidad" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h3 id="myModalLabel">Nueva Especialidad</h3>
+			</div>
+			<form id="FormNuevoUsuario" method="post" onsubmit="" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data">
+				<div class="modal-body">		
+          			<div class="row">		
+          			<div class="col-md-1"></div>	
+			          	<div class="col-md-10 form-group">
+				            <label for="recipient-name" class="control-label">Nombre:</label>
+				            <input id="nombreEspecialidad" name="nombreEspecialidad" type="text" class="form-control" id="recipient-name" required>
+			          	</div>	
+			        </div>	  			        
+			        <div class="row">		
+          			<div class="col-md-1"></div>	
+			          	<div class="col-md-10 form-group">
+				            <label for="recipient-name" class="control-label">Descripción:</label>
+				            <textarea id="Descripcion" name="Descripcion" type="text" class="form-control" id="recipient-name" required></textarea>
+			          	</div>	
+			        </div>	  			        
+				</div>
+				<div id="MensajeFormularioUsuario"></div>
+				<div class="modal-footer">
+					<button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>					
+					<input name="EnviarEspecial" id="EnviarEspecial" type="submit" class="btn btn-primary" value="Aceptar">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- END MODAL AGREGAR ESPECIALIDAD USUARIO -->
+
+
 <!--Tabla Usuarios start-->
-<div class="panel-body1">
-<table class="table">
+<div class=" panel-body1">
+	<div class="table-responsive">
+		<table class="table table-striped">
+	 		<thead>
+				<tr>
+			  		<th>Codigo Usuario</th>
+			  		<th>Nombres</th>
+			  		<th>Apellidos</th>
+			  		<th>Email</th>
+			  		<th>Telefono</th>
+			  		<th>Tipo Usuario</th>
+				</tr>
+		  	</thead>
+		  	<tbody>
+			  	<?php foreach($usuarios as $ListUsers) { 
+			  		echo '<tr>';
+			  		echo '<th scope="row">'.$ListUsers->codigoUsuario.'</th>';
+			  		echo '<td>'.$ListUsers->nombres.'</td>';
+			  		echo '<td>'.$ListUsers->apellidos.'</td>';
+			  		echo '<td>'.$ListUsers->correo.'</td>';
+			  		echo '<td>'.$ListUsers->telefono.'</td>';
+			  		echo '<td>'.$ListUsers->tipousuario.'</td>';
+			  		echo '</tr>';
+				}?>	
+		  	</tbody>
+		</table>
+	</div>
+</div>
+
+
+<div class="col-md-6">
+	<div class=" panel-body1">
+	<div class="table-responsive">
+		<table class="table table-striped">
  	<thead>
 		<tr>
 	  		<th>Codigo Usuario</th>
@@ -357,5 +435,7 @@
 		}?>	
   	</tbody>
 </table>
+	</div>
+</div>
 </div>
 <!--Tabla Usuarios end-->
