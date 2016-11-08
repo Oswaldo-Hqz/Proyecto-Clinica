@@ -89,4 +89,33 @@
       $db->query("INSERT INTO tipousuarios(tipoUsuarioId, tipo) VALUES ('$Catidad','$Nombre')");
     } 
   }
+  class ObtenerUsuario {
+    public $codigoUsuario;
+    public $nombres;
+    public $apellidos;
+    public $correo;
+    public $telefono;
+    public $tipousuario;
+
+    public function __construct($codigoUsuario, $nombres, $apellidos, $correo, $telefono, $tipousuario) {
+      $this->codigoUsuario = $codigoUsuario;
+      $this->nombres       = $nombres;
+      $this->apellidos     = $apellidos;
+      $this->correo        = $correo;
+      $this->telefono      = $telefono;
+      $this->tipousuario   = $tipousuario;
+    }
+    public static function obtenerUsuarios() {
+      $list = [];
+      $db = Db::getInstance();
+      $req = $db->query('SELECT codigoUsuario,nombres,apellidos,correo,telefono,tipo 
+                          FROM usuarios u 
+                          inner join tipousuarios tu 
+                          on tu.tipoUsuarioid = u.tipoUsuarioid');
+      foreach($req->fetchAll() as $listUsuarios) {
+        $list[] = new ObtenerUsuario($listUsuarios['codigoUsuario'], $listUsuarios['nombres'], $listUsuarios['apellidos'], $listUsuarios['correo'], $listUsuarios['telefono'], $listUsuarios['tipo']);
+      }
+      return $list;
+    }
+  }
 ?>

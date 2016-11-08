@@ -43,8 +43,7 @@
 		Pages::ingresarHorario($nombreHorario, $HoraInicio." - ". $HoraFin);
 
 		$errTyp = "success";
-		$errMSG = "Registro ingresado con éxito.";
-	       	
+		$errMSG = "Registro ingresado con éxito.";	       	
 	} 
 	if (isset($_POST['EnviarTurno'])) {
 		$tipohorario = trim($_POST['tipohorario']);
@@ -91,28 +90,40 @@
   	</div>
 <?php
     }
-?>      
-<button href="#ModalNuevoUsuario" data-toggle="modal" type="button" class="btn btn-default btn-lg">  
-	<span><i class="fa fa-user-plus fa-4x"></i> 
-	<br>Crear Usuario</span>
-</button>
+?>    
+<center>
+	<button href="#ModalNuevoUsuario" data-toggle="modal" type="button" class="btn btn-default btn-lg">  
+		<span><i class="fa fa-user-plus fa-4x"></i> 
+		<br>Crear Usuario</span>
+	</button>
 
-<button href="#ModalCrearHorarios" data-toggle="modal" type="button" class="btn btn-default btn-lg">  
-	<span><i class="fa fa-clock-o fa-4x"></i> 
-	<br>Crear Horarios</span>
-</button>
+	<button href="#ModalCrearHorarios" data-toggle="modal" type="button" class="btn btn-default btn-lg">  
+		<span><i class="fa fa-clock-o fa-4x"></i> 
+		<br>Crear Horarios</span>
+	</button>
 
-<button href="#ModalCrearTurnos" data-toggle="modal" type="button" class="btn btn-default btn-lg">  
-	<span><i class="fa fa-calendar fa-4x"></i> 
-	<br>Crear Turnos</span>
-</button>
+	<button href="#ModalCrearTurnos" data-toggle="modal" type="button" class="btn btn-default btn-lg">  
+		<span><i class="fa fa-calendar fa-4x"></i> 
+		<br>Crear Turnos</span>
+	</button>
 
-<button href="#ModalNuevoTipoUsuario" data-toggle="modal" type="button" class="btn btn-default btn-lg">  
-	<span><i class="fa fa-users fa-4x"></i> 
-	<br>Nuevo Tipo Usuario</span>
-</button>
+	<button href="#ModalNuevoTipoUsuario" data-toggle="modal" type="button" class="btn btn-default btn-lg">  
+		<span><i class="fa fa-users fa-4x"></i> 
+		<br>Nuevo Tipo Usuario</span>
+	</button>
 
-<!-- MODAL CREAR NUEVO USUARIO -->
+	<button href="#ModalNuevoMedico" data-toggle="modal" type="button" class="btn btn-default btn-lg">  
+		<span><i class="fa fa-user-md fa-4x"></i> 
+		<br>Agregar Medico</span>
+	</button>
+
+	<button href="#ModalNuevaEspecialidad" data-toggle="modal" type="button" class="btn btn-default btn-lg">  
+		<span><i class="fa fa-briefcase fa-4x"></i> 
+		<br>Agregar especialidad</span>
+	</button>
+</center>  
+
+<!--modal crear nuevo usuario start-->
 <div id="ModalNuevoUsuario" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -186,7 +197,7 @@
 		</div>
 	</div>
 </div>
-<!-- END MODAL CREAR NUEVO USUARIO -->
+<!--modal crear nuevo usuario end-->
 
 <!-- MODAL CREAR NUEVO TURNO -->
 <div id="ModalCrearTurnos" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -319,3 +330,32 @@
 	</div>
 </div>
 <!-- END MODAL CREAR NUEVO TIPO USUARIO -->
+
+<!--Tabla Usuarios start-->
+<div class="panel-body1">
+<table class="table">
+ 	<thead>
+		<tr>
+	  		<th>Codigo Usuario</th>
+	  		<th>Nombres</th>
+	  		<th>Apellidos</th>
+	  		<th>Email</th>
+	  		<th>Telefono</th>
+	  		<th>Tipo Usuario</th>
+		</tr>
+  	</thead>
+  	<tbody>
+	  	<?php foreach($usuarios as $ListUsers) { 
+	  		echo '<tr>';
+	  		echo '<th scope="row">'.$ListUsers->codigoUsuario.'</th>';
+	  		echo '<td>'.$ListUsers->nombres.'</td>';
+	  		echo '<td>'.$ListUsers->apellidos.'</td>';
+	  		echo '<td>'.$ListUsers->correo.'</td>';
+	  		echo '<td>'.$ListUsers->telefono.'</td>';
+	  		echo '<td>'.$ListUsers->tipousuario.'</td>';
+	  		echo '</tr>';
+		}?>	
+  	</tbody>
+</table>
+</div>
+<!--Tabla Usuarios end-->

@@ -4,6 +4,7 @@
       $tiposU = Pages::tipos();
       $turnos = Pages::turnos();
       $horarios = Pages::Horarios();
+      $usuarios = ObtenerUsuario::obtenerUsuarios();
       require_once('views/pages/home.php');
     }
 
