@@ -37,6 +37,8 @@
       }
       return $list;
     }
+
+
     //Iserta un usario a la BD
     public static function ingresarUsuario($codigo, $nombres, $apellidos, $tipoU, $telefono, $direccion, $email, $passWord, $turno, $foto){
       $codigo = strip_tags($codigo);
@@ -89,6 +91,11 @@
       $db->query("INSERT INTO tipousuarios(tipoUsuarioId, tipo) VALUES ('$Catidad','$Nombre')");
     } 
 
+    public static function ingresarDoctor($DocID,$UserID, $Especialidad){
+      $db = Db::getInstance();      
+      $db->query("INSERT INTO doctores(codigoDoctor, codigoUsuario, especialidadID) VALUES ('$DocID','$UserID','$Especialidad')");
+    }
+
     public static function ingresarEspecialidad($Nombre,$descripcion){
       $db = Db::getInstance();
       $result = $db->query('SELECT count(*) FROM especialidades');
@@ -97,6 +104,29 @@
       $Catidad++;
       $db->query("INSERT INTO especialidades(especialidadID, nombre, descripcion) VALUES ('$Catidad','$Nombre','$descripcion')");
     }
+
+
+
+    public static function obtenertipoU() {
+      $list = [];
+      $db = Db::getInstance();
+      $req = $db->query('SELECT tipoUsuarioId, tipo FROM tipousuarios');
+      foreach($req->fetchAll() as $listTipoU) {
+        $list[] = new Pages($listTipoU['tipoUsuarioId'], $listTipoU['tipo']);
+      }
+      return $list;
+    }
+    public static function obtenerespecialidad() {
+      $list = [];
+      $db = Db::getInstance();
+      $req = $db->query('SELECT especialidadID, nombre FROM especialidades');
+      foreach($req->fetchAll() as $listEspecialidad) {
+        $list[] = new Pages($listEspecialidad['especialidadID'], $listEspecialidad['nombre']);
+      }
+      return $list;
+    }
+
+
   }
 
 
@@ -130,4 +160,48 @@
       return $list;
     }
   }
+
+
+  class ObtenerHorarios{
+    public $id;
+    public $Nombre;
+    public $Horario;
+    public function __construct($id, $Nombre, $Horario) {
+      $this->id = $id;
+      $this->Nombre = $Nombre;
+      $this->Horario = $Horario;      
+    }
+    public static function obtenerHorario() {
+      $list = [];
+      $db = Db::getInstance();
+      $req = $db->query('SELECT detalleturnoid, nombreturno, horario FROM detalleturnos');
+      foreach($req->fetchAll() as $listHorario) {
+        $list[] = new ObtenerHorarios($listHorario['detalleturnoid'], $listHorario['nombreturno'], $listHorario['horario']);
+      }
+      return $list;
+    }    
+  }
+
+  class Obtener{
+    public $id;
+    public $Var1;
+    public $Var2;
+    public function __construct($id, $Var1, $Var2) {
+      $this->id = $id;
+      $this->Var1 = $Var1;
+      $this->Var2 = $Var2;      
+    }
+    public static function DatosUsuario() {
+      $list = [];
+      $db = Db::getInstance();
+      $req = $db->query('SELECT codigoUsuario, nombres, apellidos FROM usuarios WHERE tipoUsuarioId = 2');
+      foreach($req->fetchAll() as $listHorario) {
+        $list[] = new Obtener($listHorario['codigoUsuario'], $listHorario['nombres'], $listHorario['apellidos']);
+      }
+      return $list;
+    }    
+  }
+
+
+
 ?>

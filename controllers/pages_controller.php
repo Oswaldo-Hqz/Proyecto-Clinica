@@ -5,6 +5,10 @@
       $turnos = Pages::turnos();
       $horarios = Pages::Horarios();
       $usuarios = ObtenerUsuario::obtenerUsuarios();
+      $TableHorario = ObtenerHorarios::obtenerHorario();
+      $TableTipoU = pages::obtenertipoU();
+      $DatosUsuario = Obtener::DatosUsuario();
+      $Especialidad = pages::obtenerespecialidad();
       require_once('views/pages/home.php');
     }
 

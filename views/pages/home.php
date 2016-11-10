@@ -85,6 +85,21 @@
 		$Descripcion = htmlspecialchars($Descripcion);
 		Pages::ingresarEspecialidad($nombreEsp,$Descripcion);
 	}
+	if (isset($_POST['EnviarDoctor'])) {
+		$CodDoctor = trim($_POST['CodDoctor']);
+	  	$CodDoctor = strip_tags($CodDoctor);
+		$CodDoctor = htmlspecialchars($CodDoctor);
+
+		$UsuarioDoc = trim($_POST['UsuarioDoc']);
+	  	$UsuarioDoc = strip_tags($UsuarioDoc);
+		$UsuarioDoc = htmlspecialchars($UsuarioDoc);
+
+		$EspeDoc = trim($_POST['EspeDoc']);
+	  	$EspeDoc = strip_tags($EspeDoc);
+		$EspeDoc = htmlspecialchars($EspeDoc);
+
+		Pages::ingresarDoctor($CodDoctor,$UsuarioDoc, $EspeDoc);
+	}
 ?>
 
 
@@ -100,6 +115,9 @@
 <?php
     }
 ?>    
+
+<!-- ************************ BUTTONS ************************ -->
+
 <center>
 	<button href="#ModalNuevoUsuario" data-toggle="modal" type="button" class="btn btn-default btn-lg">  
 		<span><i class="fa fa-user-plus fa-4x"></i> 
@@ -131,6 +149,8 @@
 		<br>Agregar especialidad</span>
 	</button>
 </center>  
+
+<!-- ************************ MODALS ************************ -->
 
 <!--modal crear nuevo usuario start-->
 <div id="ModalNuevoUsuario" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -340,6 +360,55 @@
 </div>
 <!-- END MODAL CREAR NUEVO TIPO USUARIO -->
 
+<!-- MODAL CREAR DOCTOR -->
+<div id="ModalNuevoMedico" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h3 id="myModalLabel">Agregar Nuevo Doctor</h3>
+			</div>
+			<form method="post" onsubmit="" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data">
+				<div class="modal-body">		
+          			<div class="row">		
+          			<div class="col-md-1"></div>	
+			          	<div class="col-md-10 form-group">
+				            <label for="recipient-name" class="control-label">Codigo de Doctor:</label>
+				            <input id="CodDoctor" name="CodDoctor" type="text" class="form-control" id="recipient-name" required>
+			          	</div>	
+			        </div>
+			        <div class="row">		
+	          			<div class="col-md-10 col-md-offset-1 form-group">
+				            <label for="recipient-name" class="control-label">Usuario:</label>
+				            <select id="UsuarioDoc" name="UsuarioDoc" class="selectpicker show-tick form-control">
+				            <?php foreach($DatosUsuario as $ListUserDatos) { 
+				            	echo '<option value="'.$ListUserDatos->id.'">'.$ListUserDatos->Var1.' '.$ListUserDatos->Var2.'</option>';
+			            	}?>		          	
+					        </select>
+			          	</div>					          	
+		          	</div>	  			        
+		          	<div class="row">		
+	          			<div class="col-md-10 col-md-offset-1 form-group">
+				            <label for="recipient-name" class="control-label">Especialidad:</label>
+				            <select id="EspeDoc" name="EspeDoc" class="selectpicker show-tick form-control">
+				            <?php foreach($Especialidad as $ListEspecial) { 
+				            	echo '<option value="'.$ListEspecial->id.'">'.$ListEspecial->tipoUsuario.'</option>';
+			            	}?>		          	
+					        </select>
+			          	</div>					          	
+		          	</div>
+				</div>
+				<div id="MensajeFormularioUsuario"></div>
+				<div class="modal-footer">
+					<button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>					
+					<input name="EnviarDoctor" id="EnviarDoctor" type="submit" class="btn btn-primary" value="Aceptar">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- END MODAL CREAR DOCTOR -->
+
 <!-- MODAL AGREGAR ESPECIALIDAD USUARIO-->
 <div id="ModalNuevaEspecialidad" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
@@ -377,6 +446,9 @@
 <!-- END MODAL AGREGAR ESPECIALIDAD USUARIO -->
 
 
+
+<!-- ************************ TABLES ************************ -->
+
 <!--Tabla Usuarios start-->
 <div class=" panel-body1">
 	<div class="table-responsive">
@@ -406,36 +478,57 @@
 		</table>
 	</div>
 </div>
+<!--Tabla Usuarios end-->
 
 
+<!--Tabla Horarios start-->
 <div class="col-md-6">
 	<div class=" panel-body1">
-	<div class="table-responsive">
-		<table class="table table-striped">
- 	<thead>
-		<tr>
-	  		<th>Codigo Usuario</th>
-	  		<th>Nombres</th>
-	  		<th>Apellidos</th>
-	  		<th>Email</th>
-	  		<th>Telefono</th>
-	  		<th>Tipo Usuario</th>
-		</tr>
-  	</thead>
-  	<tbody>
-	  	<?php foreach($usuarios as $ListUsers) { 
-	  		echo '<tr>';
-	  		echo '<th scope="row">'.$ListUsers->codigoUsuario.'</th>';
-	  		echo '<td>'.$ListUsers->nombres.'</td>';
-	  		echo '<td>'.$ListUsers->apellidos.'</td>';
-	  		echo '<td>'.$ListUsers->correo.'</td>';
-	  		echo '<td>'.$ListUsers->telefono.'</td>';
-	  		echo '<td>'.$ListUsers->tipousuario.'</td>';
-	  		echo '</tr>';
-		}?>	
-  	</tbody>
-</table>
+		<div class="table-responsive">
+			<table class="table table-striped">
+			 	<thead>
+					<tr>
+						<th>#</th>
+				  		<th>Nombre Horario</th>
+				  		<th>Horario</th>
+					</tr>
+			  	</thead>
+			  	<tbody>
+				  	<?php foreach($TableHorario as $ListHorarios) { 
+				  		echo '<tr>';
+				  		echo '<th scope="row">'.$ListHorarios->id.'</th>';
+				  		echo '<td>'.$ListHorarios->Nombre.'</td>';
+				  		echo '<td>'.$ListHorarios->Horario.'</td>';
+				  		echo '</tr>';
+					}?>	
+			  	</tbody>
+			</table>
+		</div>
 	</div>
 </div>
+<!--Tabla Horarios end-->
+
+<!--Tabla tipo usuarios start-->
+<div class="col-md-6">
+	<div class=" panel-body1">
+		<div class="table-responsive">
+			<table class="table table-striped">
+			 	<thead>
+					<tr>
+						<th>#</th>
+				  		<th>Tipo de usuario</th>
+					</tr>
+			  	</thead>
+			  	<tbody>
+				  	<?php foreach($TableTipoU as $ListTipoUser) { 
+				  		echo '<tr>';
+				  		echo '<th scope="row">'.$ListTipoUser->id.'</th>';
+				  		echo '<td>'.$ListTipoUser->tipoUsuario.'</td>';
+				  		echo '</tr>';
+					}?>	
+			  	</tbody>
+			</table>
+		</div>
+	</div>
 </div>
-<!--Tabla Usuarios end-->
+<!--Tabla tipo usuarios end-->
