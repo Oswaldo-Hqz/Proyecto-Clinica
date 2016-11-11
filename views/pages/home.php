@@ -3,8 +3,7 @@
 <p>You successfully landed on the home page. Congrats!</p>
 -->
 <?php
-	if(isset($_POST['EnviarUsuario']))
-	{
+	if(isset($_POST['EnviarUsuario'])){
 		if ( !isset($_FILES["foto"]) || $_FILES["foto"]["error"] > 0){
 			$errTyp = "danger";
 			$errMSG = "Algo ha salido mal, intente de nuevo..."; 	        	
@@ -130,7 +129,7 @@
 	</button>
 
 	<button href="#ModalCrearTurnos" data-toggle="modal" type="button" class="btn btn-default btn-lg">  
-		<span><i class="fa fa-calendar fa-4x"></i> 
+		<span><i class="fa fa-calendar-plus-o fa-4x"></i> 
 		<br>Crear Turnos</span>
 	</button>
 

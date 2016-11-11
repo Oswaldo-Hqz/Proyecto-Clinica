@@ -13,7 +13,7 @@
     }
 
     public function error() {
-      require_once('views/pages/error.php');
+      require_once('views/Error/error.php');
     }
   }
 ?>

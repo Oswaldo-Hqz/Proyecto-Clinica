@@ -10,6 +10,10 @@
         require_once('models/pages.php');
         $controller = new PagesController();
       break;
+      case 'usuarios':
+        require_once('models/usuarios.php');
+        $controller = new UsuariosController();
+      break;
       case 'posts':        
         require_once('models/post.php');
         $controller = new PostsController();
@@ -19,6 +23,7 @@
   }
   // Lista de controllers que tenemos y los actions respectivos  
   $controllers = array('pages' => ['home', 'error'],
+                       'usuarios' => ['home', 'error'],
                        'posts' => ['index', 'show']);
 
   // check that the requested controller and action are both allowed
