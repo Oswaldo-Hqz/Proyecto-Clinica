@@ -52,9 +52,8 @@
            ?>
 
             <li class="active"><a href="?controller=usuarios&action=home"><i class="fa fa-user-circle"></i><span>Usuarios</span></a></li>
-            <li><a href="#"><i class="fa fa-clock-o"></i><span>Horarios</span></a></li>
-            <li><a href="#"><i class="fa fa-calendar"></i> <span>Turnos</span></a></li>              
-            <li><a href="#"><i class="fa fa-user-md"></i> <span>Medicos</span></a></li>      
+            <li><a href="?controller=horarios&action=home"><i class="fa fa-clock-o"></i><span>Horarios y Turnos</span></a></li>
+            <li><a href="?controller=doctores&action=home"><i class="fa fa-user-md"></i> <span>Medicos</span></a></li>      
             <li><a href="#"><i class="fa fa-address-card"></i> <span>Pacientes</span></a></li>
             <li><a href="#"><i class="fa fa-address-book"></i> <span>Historial Consultas</span></a></li>            
 

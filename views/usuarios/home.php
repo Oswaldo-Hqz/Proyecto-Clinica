@@ -24,6 +24,12 @@
 				$errMSG = "archivo no permitido, es tipo de archivo prohibido o excede el tamano de $limite_kb Kilobytes";
 			}
   		}
+	}
+
+	if(isset($_POST['EliminarUsuario'])){
+		$CodigoUsuario = trim($_POST['CodigoUsuario']);
+	  	$CodigoUsuario = strip_tags($CodigoUsuario);
+		eliminar::eliminarUsuario($CodigoUsuario);
 	} 
 ?>
 
@@ -64,7 +70,7 @@
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h3 id="myModalLabel">Crear Nuevo Usuario</h3>
 			</div>
-			<form id="FormNuevoUsuario" method="post" onsubmit="return validarNuevoUsuario(this)" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data">
+			<form id="FormNuevoUsuario" method="post" onsubmit="return validarNuevoUsuario(this)" action="?controller=usuarios&action=home" enctype="multipart/form-data">
 				<div class="modal-body">	
 					<div class="row">												
 				        <div class="col-md-4 form-group">
@@ -140,12 +146,12 @@
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h3 id="myModalLabel">Eliminar Usuario</h3>
 			</div>
-			<form id="FormNuevoUsuario" method="post" onsubmit="return validarNuevoUsuario(this)" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data">
+			<form id="FormNuevoUsuario" method="post" onsubmit="return validarNuevoUsuario(this)" action="?controller=usuarios&action=home" enctype="multipart/form-data">
 				<div class="modal-body">					
 		          	<div class="row">		
 	          			<div class="col-md-10 col-md-offset-1 form-group">
 				            <label for="recipient-name" class="control-label">Codigo Usuario:</label>
-				            <select id="tipoU" name="tipoU" class="selectpicker show-tick form-control">
+				            <select id="CodigoUsuario" name="CodigoUsuario" class="selectpicker show-tick form-control">
 				            <?php foreach($usuarios as $ListUsuarios) { 
 				            	echo '<option value="'.$ListUsuarios->codigoUsuario.'">'.$ListUsuarios->codigoUsuario.' - '.$ListUsuarios->nombres.' '.$ListUsuarios->apellidos.'</option>';
 			            	}?>		          	

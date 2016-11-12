@@ -38,7 +38,6 @@
       return $list;
     }
   }
-
   class ObtenerUsuario {
     public $codigoUsuario;
     public $nombres;
@@ -95,6 +94,14 @@
         $turno = htmlspecialchars($turno); 
         $db = Db::getInstance();
         $db->query("INSERT INTO usuarios(codigoUsuario, nombres, apellidos, correo, passw, photo, telefono, direccion, turnoId, tipoUsuarioId) VALUES ('$codigo','$nombres','$apellidos','$email','$password','$foto','$telefono','$direccion',$turno,$tipoU)");
+    }
+  }
+  class eliminar{
+    function __construct(){
+    }
+    public static function eliminarUsuario($id){
+      $db = Db::getInstance();
+      $req = $db->query("DELETE FROM usuarios WHERE codigoUsuario = '$id'");
     }
   }
 ?>
