@@ -6,7 +6,7 @@
 				<span>Oops!</span>
 				<p>La pagina que esta buscando, no esta disponible por el momento.</p>
 				<div class="error-btn">
-					<a href="index.php">Volver?</a>
+					<a href="home">Volver?</a>
 				</div>
 			</div>
 			<div class="col-xs-5 error-main-right">

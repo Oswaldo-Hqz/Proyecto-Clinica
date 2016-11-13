@@ -9,7 +9,7 @@
       $TableTipoU = pages::obtenertipoU();
       $DatosUsuario = Obtener::DatosUsuario();
       $Especialidad = pages::obtenerespecialidad();
-      require_once('views/pages/home.php');
+      require_once('views/Administrador/pages/home.php');
     }
 
     public function error() {

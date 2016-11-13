@@ -3,7 +3,7 @@
     public function home() {
       $TableHorario = Horarios::obtenerHorario();
       $TableTurnos = Turnos::obtenerTurnos();
-      require_once('views/horarios/home.php');
+      require_once('views/Administrador/horarios/home.php');
     }
 
     public function error() {

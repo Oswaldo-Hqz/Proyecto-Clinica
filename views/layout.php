@@ -38,10 +38,10 @@
 
       <!--logo and iconic logo start-->
       <div class="logo">
-        <img href="index.php" src="img/logo_mini.png" alt="Logo">        
+        <img href="home" src="img/logo_mini.png" alt="Logo">        
       </div>
       <div class="logo-icon text-center">
-        <a href="index.php"><i class="lnr lnr-home"></i> </a>
+        <a href="home"><i class="lnr lnr-home"></i> </a>
       </div>
       <!--logo and iconic logo end-->
 
@@ -51,7 +51,7 @@
           <?php if ($_SESSION['Tipo'] == 'Administrador') {
            ?>
 
-            <li class="active"><a href="?controller=usuarios&action=home"><i class="fa fa-user-circle"></i><span>Usuarios</span></a></li>
+            <li><a href="?controller=usuarios&action=home"><i class="fa fa-user-circle"></i><span>Usuarios</span></a></li>
             <li><a href="?controller=horarios&action=home"><i class="fa fa-clock-o"></i><span>Horarios y Turnos</span></a></li>
             <li><a href="?controller=doctores&action=home"><i class="fa fa-user-md"></i> <span>Medicos</span></a></li>      
             <li><a href="#"><i class="fa fa-address-card"></i> <span>Pacientes</span></a></li>
@@ -60,9 +60,10 @@
           <?php  
           } if ($_SESSION['Tipo'] == 'Doctor') {          
           ?>
-            <li class="active"><a href="index.php"><i class="fa fa-user-circle"></i><span>Usuarios</span></a></li>
+            <li><a href="index.php"><i class="fa fa-user-circle"></i><span>Usuarios</span></a></li>
             <li><a href="#"><i class="fa fa-clock-o"></i><span>Horarios</span></a></li>
           <?php } ?>
+
           </ul>
         <!--sidebar nav end-->
       </div>
@@ -97,8 +98,8 @@
                     </div>  
                   </a>
                   <ul class="dropdown-menu drp-mnu">
-                    <li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li> 
-                    <li> <a href="#"><i class="fa fa-user"></i>Profile</a> </li> 
+                    <!--<li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li> 
+                    <li> <a href="#"><i class="fa fa-user"></i>Profile</a> </li> -->
                     <li> <a href='logout.php?logout'><i class="fa fa-sign-out"></i> Salir</a> </li>
                   </ul>
                 </li>

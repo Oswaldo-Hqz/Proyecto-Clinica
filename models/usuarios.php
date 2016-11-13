@@ -37,6 +37,16 @@
       }
       return $list;
     }
+
+    public static function obtenertipoU() {
+      $list = [];
+      $db = Db::getInstance();
+      $req = $db->query('SELECT tipoUsuarioId, tipo FROM tipousuarios');
+      foreach($req->fetchAll() as $listTipoU) {
+        $list[] = new obtener($listTipoU['tipoUsuarioId'], $listTipoU['tipo']);
+      }
+      return $list;
+    }
   }
   class ObtenerUsuario {
     public $codigoUsuario;
@@ -45,24 +55,28 @@
     public $correo;
     public $telefono;
     public $tipousuario;
+    public $direccion;
+    public $turnoid;
 
-    public function __construct($codigoUsuario, $nombres, $apellidos, $correo, $telefono, $tipousuario) {
+    public function __construct($codigoUsuario, $nombres, $apellidos, $correo, $telefono, $tipousuario, $direccion, $turnoid) {
       $this->codigoUsuario = $codigoUsuario;
       $this->nombres       = $nombres;
       $this->apellidos     = $apellidos;
       $this->correo        = $correo;
       $this->telefono      = $telefono;
       $this->tipousuario   = $tipousuario;
+      $this->direccion     = $direccion;
+      $this->turnoid       = $turnoid;
     }
     public static function obtenerUsuarios() {
       $list = [];
       $db = Db::getInstance();
-      $req = $db->query('SELECT codigoUsuario,nombres,apellidos,correo,telefono,tipo 
+      $req = $db->query('SELECT codigoUsuario,nombres,apellidos,correo,telefono,tipo,direccion,turnoId
                           FROM usuarios u 
                           inner join tipousuarios tu 
                           on tu.tipoUsuarioid = u.tipoUsuarioid');
       foreach($req->fetchAll() as $listUsuarios) {
-        $list[] = new ObtenerUsuario($listUsuarios['codigoUsuario'], $listUsuarios['nombres'], $listUsuarios['apellidos'], $listUsuarios['correo'], $listUsuarios['telefono'], $listUsuarios['tipo']);
+        $list[] = new ObtenerUsuario($listUsuarios['codigoUsuario'], $listUsuarios['nombres'], $listUsuarios['apellidos'], $listUsuarios['correo'], $listUsuarios['telefono'], $listUsuarios['tipo'], $listUsuarios['direccion'], $listUsuarios['turnoId']);
       }
       return $list;
     }
@@ -102,6 +116,29 @@
     public static function eliminarUsuario($id){
       $db = Db::getInstance();
       $req = $db->query("DELETE FROM usuarios WHERE codigoUsuario = '$id'");
+    }
+  }
+  class actualizar{
+    function __construct(){
+    }
+    public static function DatosUsuario($codigo,$nombres,$apellidos,$email,$telefono,$direccion,$turno){
+      $db = Db::getInstance();
+      $req = $db->query("UPDATE usuarios SET nombres = '$nombres', apellidos = '$apellidos', correo = '$email', telefono = '$telefono', direccion = '$direccion', turnoId = '$turno' WHERE codigoUsuario = '$codigo'");
+    }
+
+    public static function PassUsuario($codigo,$passWordNew){
+      $db = Db::getInstance();
+      $req = $db->query("UPDATE usuarios SET passw = '$passWordNew' WHERE codigoUsuario = '$codigo'");
+    }
+
+    public static function TipoUsuario($codigo,$nombreTipo){
+      $db = Db::getInstance();
+      $req = $db->query("UPDATE tipousuarios SET tipo = '$nombreTipo' WHERE tipoUsuarioId = '$codigo'");
+    }
+
+    public static function EliminarTipoU($codigo){
+      $db = Db::getInstance();
+      $req = $db->query("DELETE FROM tipousuarios WHERE tipoUsuarioId = '$codigo'");
     }
   }
 ?>

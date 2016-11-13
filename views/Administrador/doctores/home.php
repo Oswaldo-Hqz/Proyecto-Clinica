@@ -176,7 +176,10 @@
 			  		echo '<td>'.$ListDoc->Apellidos.'</td>';
 			  		echo '<td>'.$ListDoc->Email.'</td>';
 			  		echo '<td>'.$ListDoc->Telefono.'</td>';
-			  		echo '<td><button href="#" data-toggle="modal" type="button" class="btn btn-default"><span><i class="fa fa-pencil"></i></span></button></td>';
+			  		echo '<td>
+			  		<button href="#" data-toggle="modal" type="button" class="btn btn-default"><span><i class="fa fa-pencil"></i></span></button>
+			  		<button type="button" class="btn btn-default" data-toggle="modal"  data-target="#ModalEliminarTipoU" data-id="" ><span><i class="fa fa-trash"></i><br></span></button>
+			  		</td>';
 			  		echo '</tr>';
 				}?>	
 		  	</tbody>
@@ -195,6 +198,7 @@
 			  		<th>Especialidad</th>
 			  		<th>Descripción</th>
 			  		<th></th>
+			  		<th></th>
 				</tr>
 		  	</thead>
 		  	<tbody>
@@ -203,8 +207,13 @@
 			  		echo '<th scope="row">'.$ListEsp->id.'</th>';
 			  		echo '<td>'.$ListEsp->Var1.'</td>';
 			  		echo '<td>'.$ListEsp->Var2.'</td>';
-			  		echo '<td><button href="#" data-toggle="modal" type="button" class="btn btn-default"><span><i class="fa fa-pencil"></i></span></button></td>';
-			  		echo '</tr>';
+			  		echo '<td>
+			  		<button href="#" data-toggle="modal" type="button" class="btn btn-default"><span><i class="fa fa-pencil"></i></span></button>			  		
+			  		</td>';
+			  		echo '<td>			  		
+			  		<button type="button" class="btn btn-default" data-toggle="modal"  data-target="#ModalEliminarTipoU" data-id="" ><span><i class="fa fa-trash"></i><br></span></button>
+			  		</td>';
+			  		echo '</tr>';			  		
 				}?>	
 		  	</tbody>
 		</table>

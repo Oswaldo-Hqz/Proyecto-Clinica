@@ -4,29 +4,41 @@
     // requiere el archivo que coincide con el nombre de controller
     require_once('controllers/' . $controller . '_controller.php');
 
-    // crea una nueva instancia del controller necesario
-    switch($controller) {
-      case 'pages':
-        require_once('models/pages.php');
-        $controller = new PagesController();
-      break;
-      case 'usuarios':
-        require_once('models/usuarios.php');
-        $controller = new UsuariosController();
-      break;
-      case 'horarios':
-        require_once('models/horarios.php');
-        $controller = new HorariosController();
-      break;
-      case 'doctores':
-        require_once('models/doctores.php');
-        $controller = new DoctoresController();
-      break;
-      case 'posts':        
-        require_once('models/post.php');
-        $controller = new PostsController();
-      break;
-    }    
+    if ($_SESSION['Tipo'] == 'Administrador') {
+      // crea una nueva instancia del controller necesario
+      switch($controller) {
+        case 'pages':
+          require_once('models/pages.php');
+          $controller = new PagesController();
+        break;
+        case 'usuarios':
+          require_once('models/usuarios.php');
+          $controller = new UsuariosController();
+        break;
+        case 'horarios':
+          require_once('models/horarios.php');
+          $controller = new HorariosController();
+        break;
+        case 'doctores':
+          require_once('models/doctores.php');
+          $controller = new DoctoresController();
+        break;
+        case 'posts':        
+          require_once('models/post.php');
+          $controller = new PostsController();
+        break;
+      }                
+    }      
+    if ($_SESSION['Tipo'] == 'Doctor') {
+      // crea una nueva instancia del controller necesario
+      switch($controller) {
+        case 'doctor':
+          require_once('models/doctor.php');
+          $controller = new DoctorController();
+        break;        
+      }                
+    } 
+
     $controller->{ $action }();
   }
   // Lista de controllers que tenemos y los actions respectivos  
@@ -34,7 +46,10 @@
                        'usuarios' => ['home', 'error'],
                        'horarios' => ['home', 'error'],
                        'doctores' => ['home', 'error'],
-                       'posts' => ['index', 'show']);
+                       'posts' => ['index', 'show'],
+
+                       'doctor' => ['home', 'show'],
+                       );
 
   // check that the requested controller and action are both allowed
   // if someone tries to access something else he will be redirected to the error action of the pages controller

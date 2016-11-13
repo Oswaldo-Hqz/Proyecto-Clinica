@@ -5,7 +5,7 @@
       $Especialidad = ObtenerEsp::obtenerespecialidad();
       $Doctores = ObtenerDoc::obtenerDoctores();
       $Especialidades = Obtener::Especialidad();
-      require_once('views/doctores/home.php');
+      require_once('views/Administrador/doctores/home.php');
     }
 
     public function error() {

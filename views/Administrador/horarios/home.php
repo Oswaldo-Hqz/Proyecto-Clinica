@@ -196,7 +196,10 @@
 				  		echo '<th scope="row">'.$ListHorarios->id.'</th>';
 				  		echo '<td>'.$ListHorarios->Nombre.'</td>';
 				  		echo '<td>'.$ListHorarios->Horario.'</td>';
-				  		echo '<td><button href="#" data-toggle="modal" type="button" class="btn btn-default"><span><i class="fa fa-pencil"></i></span></button></td>';
+				  		echo '<td>
+				  		<button href="#" data-toggle="modal" type="button" class="btn btn-default"><span><i class="fa fa-pencil"></i></span></button>
+				  		<button type="button" class="btn btn-default" data-toggle="modal"  data-target="#ModalEliminarTipoU" data-id="" ><span><i class="fa fa-trash"></i><br></span></button>
+				  		</td>';
 				  		echo '</tr>';
 					}?>	
 			  	</tbody>
@@ -237,7 +240,10 @@
 				  		if ($ListTurnos->J == '1') {echo '<td><span><center><i class="fa fa-calendar-check-o fa-2x"></i></center></span></td>';} else {echo '<td><span><center><i class="fa fa-calendar-o fa-2x"></i></center></span></td>';}
 				  		if ($ListTurnos->V == '1') {echo '<td><span><center><i class="fa fa-calendar-check-o fa-2x"></i></center></span></td>';} else {echo '<td><span><center><i class="fa fa-calendar-o fa-2x"></i></center></span></td>';}
 				  		if ($ListTurnos->S == '1') {echo '<td><span><center><i class="fa fa-calendar-check-o fa-2x"></i></center></span></td>';} else {echo '<td><span><center><i class="fa fa-calendar-o fa-2x"></i></center></span></td>';}
-				  		echo '<td><button href="#" data-toggle="modal" type="button" class="btn btn-default"><span><i class="fa fa-pencil"></i></span></button></td>';
+				  		echo '<td>
+				  		<button href="#" data-toggle="modal" type="button" class="btn btn-default"><span><i class="fa fa-pencil"></i></span></button>
+				  		<button type="button" class="btn btn-default" data-toggle="modal"  data-target="#ModalEliminarTipoU" data-id="" ><span><i class="fa fa-trash"></i><br></span></button>
+				  		</td>';
 				  		echo '</tr>';
 					}?>	
 			  	</tbody>

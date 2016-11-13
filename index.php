@@ -5,24 +5,31 @@
 
 	if ( isset($_SESSION['user']) != "" ) {//No accede si usuario no ha ingresado correctamente
 
-	 	if (isset($_GET['controller']) && isset($_GET['action'])) {
-	 	    $controller = $_GET['controller'];
-	 	    $action     = $_GET['action'];
-    	} 
-	    else {
-		    $controller = 'pages';
-		    $action     = 'home';
-		}
-
 		$db = Db::getInstance();
 	    $req = $db->query("SELECT nombres, apellidos, tipo, photo FROM usuarios inner join tipousuarios on tipousuarios.tipoUsuarioId = usuarios.tipoUsuarioId WHERE codigoUsuario='".$_SESSION['user']."'");
+
 	    $results = $req->fetch();
 	    $strNombre = explode(" ", $results['nombres']);
+    	
     	$_SESSION['Nombre'] = $strNombre[0];
     	$_SESSION['Apellido'] = explode(" ", $results['apellidos']);
 		$_SESSION['Tipo'] = $results['tipo'];
 		$_SESSION['foto'] = $results['photo'];
 
+	 	if (isset($_GET['controller']) && isset($_GET['action'])) {
+	 	    $controller = $_GET['controller'];
+	 	    $action     = $_GET['action'];
+    	} 
+	    else {
+	    	if ($_SESSION['Tipo'] == 'Administrador') {
+	    		$controller = 'pages';
+		    	$action     = 'home';
+	    	}	    	
+		    if ($_SESSION['Tipo'] == 'Doctor') {
+	    		$controller = 'doctor';
+		    	$action     = 'home';
+	    	}
+		}
 		require_once('views/layout.php');  
   	exit;
  	}

@@ -8,6 +8,7 @@
  	$passError = "";
 
  	if( isset($_POST['btn-login']) ) { 
+ 		
 		$email = trim($_POST['email']);
 		$email = strip_tags($email);
 		$email = htmlspecialchars($email);
@@ -46,9 +47,8 @@
 			    else {
 				    $controller = 'pages';
 				    $action     = 'home';
-				}
-				//require_once('views/layout.php');  
-				header("Location: index.php");
+				} 
+				header("Location: home");
 		   	} else {
 		    	$errMSG = "Datos incorrectos, intente nuevamente.";
 		   	}  
