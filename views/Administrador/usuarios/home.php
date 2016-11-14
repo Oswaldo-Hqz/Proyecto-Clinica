@@ -13,8 +13,7 @@
 	          	$fp     = fopen($imagen_temporal, 'r+b');
 	          	$data = fread($fp, filesize($imagen_temporal));
 	          	fclose($fp);
-        	  	$data = mysql_escape_string($data);
-
+	          	
           	   	IngresarUsuario::ingresarUsuario(trim($_POST['codigo']), trim($_POST['nombres']), trim($_POST['apellidos']), trim($_POST['tipoU']), trim($_POST['telefono']), trim($_POST['direccion']), trim($_POST['email']), trim($_POST['passWord']), trim($_POST['turno']), $data);
           	   	$errTyp = "success";
 				$errMSG = "Registro ingresado con éxito.";
@@ -377,8 +376,8 @@
 				<div class="modal-body">		
           			<div class="row">
           			<div class="form-group">
-				            <input id="codigo" name="codigo" type="hidden" class="form-control" required>
-			          	</div>			
+			            <input id="codigo" name="codigo" type="hidden" class="form-control" required>
+		          	</div>			
           			<div class="col-md-1"></div>	
 			          	<div class="col-md-10 form-group">
 				            <label for="recipient-name" class="control-label text-center text-danger">¿Realmente desea eliminar este Tipo de Usuario? </label>				            

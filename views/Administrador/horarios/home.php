@@ -42,6 +42,45 @@
 		$errTyp = "success";
 		$errMSG = "Registro ingresado con éxito.";	
 	} 
+
+	if (isset($_POST['EditHorario'])) {
+		$codigo = trim($_POST['codigo']);
+	  	$codigo = strip_tags($codigo);
+		$codigo = htmlspecialchars($codigo);
+		$nombreHorario = trim($_POST['nombreHorario']);
+	  	$nombreHorario = strip_tags($nombreHorario);
+		$nombreHorario = htmlspecialchars($nombreHorario);
+		$HoraInicio = trim($_POST['HoraInicio']);
+	  	$HoraInicio = strip_tags($HoraInicio);
+		$HoraInicio = htmlspecialchars($HoraInicio);
+		$HoraFin = trim($_POST['HoraFin']);
+	  	$HoraFin = strip_tags($HoraFin);
+		$HoraFin = htmlspecialchars($HoraFin);
+		actualizar::EditHorario($id, $nombreHorario, $HoraInicio." - ". $HoraFin);
+
+		$errTyp = "success";
+		$errMSG = "Registro ingresado con éxito.";	       	
+	}
+
+	if (isset($_POST['EliminarHorario'])) {
+
+		$codigo = trim($_POST['codigo']);
+	  	$codigo = strip_tags($codigo);
+		$codigo = htmlspecialchars($codigo);
+
+		$db = Db::getInstance();
+      	$result = $db->query("SELECT count(*) FROM turnos WHERE detalleturnoid = '$codigo'");
+      	$valor = $result->fetch();
+      	$Catidad = $valor[0];
+      	if ($Catidad == 0) {
+      		actualizar::EliminarHorario($codigo);
+      		$errTyp = "success";
+			$errMSG = "Registro eliminado con éxito.";
+      	} else {
+      		$errTyp = "danger";
+			$errMSG = "Registro no puede ser eliminado, está asignado a usuario.";
+      	} 
+	}
 ?>
 
 <?php
@@ -175,6 +214,84 @@
 </div>
 <!-- END MODAL CREAR NUEVO TURNO -->
 
+
+<!-- MODAL EDIT NUEVO HORARIO -->
+<div id="ModalEditHorario" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h3 class="text-center" id="myModalLabel">Editar Horario</h3>
+			</div>
+			<form id="FormNuevoUsuario" method="post" onsubmit="" action="?controller=horarios&action=home" enctype="multipart/form-data">
+				<div class="modal-body">		
+          			<div class="row">		
+          			<div class="form-group">
+			            <input id="codigo" name="codigo" type="hidden" class="form-control" required>
+		          	</div>
+          			<div class="col-md-1"></div>	
+			          	<div class="col-md-10 form-group">
+				            <label for="recipient-name" class="control-label">Nombre del horario:</label>
+				            <input id="nombreHorario" name="nombreHorario" type="text" class="form-control" id="recipient-name" required>
+			          	</div>	
+			        </div>	  
+			        <div class="row"> 
+						<label for="recipient-name" class="control-label">Hora Inicio:</label>
+						<div class="form-group input-group bootstrap-timepicker timepicker">							
+				            <input id="EditTimepicker1" name="HoraInicio" type="text" class="form-control input-small">
+				            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+				        </div>						
+			        </div>
+					<div class="row"> 
+						<label for="recipient-name" class="control-label">Hora Fin:</label>
+						<div class="col-md-2 form-group input-group bootstrap-timepicker timepicker">							
+				            <input id="EditTimepicker2" name="HoraFin" type="text" class="form-control input-small">
+				            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+				        </div>						
+			        </div>
+				</div>
+				<div id="MensajeFormularioUsuario"></div>
+				<div class="modal-footer">
+					<button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>					
+					<input name="EditHorario" id="EditHorario" type="submit" class="btn btn-primary" value="Aceptar">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- END MODAL EDIT NUEVO HORARIO -->
+
+<!-- MODAL DELETE NUEVO HORARIO -->
+<div id="ModalEliminarHorario" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h3 class="text-center" id="myModalLabel">Eliminar Horario</h3>
+			</div>
+			<form id="FormNuevoUsuario" method="post" onsubmit="" action="?controller=horarios&action=home" enctype="multipart/form-data">
+				<div class="modal-body">		
+          			<div class="row">
+          			<div class="form-group">
+			            <input id="codigo" name="codigo" type="hidden" class="form-control" required>
+		          	</div>			
+          			<div class="col-md-1"></div>	
+			          	<div class="col-md-10 form-group">
+				            <label for="recipient-name" class="control-label text-center text-danger">¿Realmente desea eliminar este horario del registro? </label>				            
+			          	</div>	
+			        </div>	  			        
+				</div>
+				<div id="MensajeFormularioUsuario"></div>
+				<div class="modal-footer">
+					<button class="btn" data-dismiss="modal" aria-hidden="true">No</button>					
+					<input name="EliminarHorario" id="EliminarHorario" type="submit" class="btn btn-primary" value="Si">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- END MODAL DELETE NUEVO HORARIO -->
+
 <!-- ************************ TABLES ************************ -->
 
 <!--Tabla Horarios start-->
@@ -197,8 +314,8 @@
 				  		echo '<td>'.$ListHorarios->Nombre.'</td>';
 				  		echo '<td>'.$ListHorarios->Horario.'</td>';
 				  		echo '<td>
-				  		<button href="#" data-toggle="modal" type="button" class="btn btn-default"><span><i class="fa fa-pencil"></i></span></button>
-				  		<button type="button" class="btn btn-default" data-toggle="modal"  data-target="#ModalEliminarTipoU" data-id="" ><span><i class="fa fa-trash"></i><br></span></button>
+				  		<button type="button" class="btn btn-default" data-toggle="modal"  data-target="#ModalEditHorario" data-id="'.$ListHorarios->id.'" data-nombre="'.$ListHorarios->Nombre.'"><span><i class="fa fa-pencil"></i></span></button>
+				  		<button type="button" class="btn btn-default" data-toggle="modal"  data-target="#ModalEliminarHorario" data-id="'.$ListHorarios->id.'" ><span><i class="fa fa-trash"></i><br></span></button>
 				  		</td>';
 				  		echo '</tr>';
 					}?>	

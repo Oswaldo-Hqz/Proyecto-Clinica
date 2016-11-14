@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="css/font-awesome.min.css">
   <link rel="stylesheet" href="css/bootstrap-select.min.css">
   <link href="css/bootstrap-switch.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/css/bootstrap-timepicker.min.css" rel="stylesheet">
   
   <script src="js/wow.min.js"></script>
@@ -48,8 +49,9 @@
       <div class="left-side-inner">
         <!--sidebar nav start-->
           <ul class="nav nav-pills nav-stacked custom-nav">
-          <?php if ($_SESSION['Tipo'] == 'Administrador') {
-           ?>
+          <?php
+            if ($_SESSION['Tipo'] == 'Administrador') {
+          ?>
 
             <li><a href="?controller=usuarios&action=home"><i class="fa fa-user-circle"></i><span>Usuarios</span></a></li>
             <li><a href="?controller=horarios&action=home"><i class="fa fa-clock-o"></i><span>Horarios y Turnos</span></a></li>
@@ -58,11 +60,18 @@
             <li><a href="#"><i class="fa fa-address-book"></i> <span>Historial Consultas</span></a></li>            
 
           <?php  
-          } if ($_SESSION['Tipo'] == 'Doctor') {          
+            } if ($_SESSION['Tipo'] == 'Doctor') {          
           ?>
             <li><a href="index.php"><i class="fa fa-user-circle"></i><span>Usuarios</span></a></li>
             <li><a href="#"><i class="fa fa-clock-o"></i><span>Horarios</span></a></li>
-          <?php } ?>
+          <?php  
+            } if ($_SESSION['Tipo'] == 'Asistente') {          
+          ?>
+            <li><a href="index.php"><i class="fa fa-address-card-o"></i><span>Pacientes</span></a></li>
+            <li><a href="#"><i class="fa fa-list-alt"></i><span>Recetas</span></a></li>
+          <?php 
+          } 
+          ?>
 
           </ul>
         <!--sidebar nav end-->
@@ -134,10 +143,29 @@
   <script src="js/jquery.nicescroll.js"></script>
   <script src="js/scripts.js"></script>
   <script src="js/bootstrap.min.js"></script>
-  <script src="js/bootstrap-switch.js"></script>MyScripts
+  <script src="js/bootstrap-switch.js"></script>  
    <script src="js/MyScripts.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.min.js"></script>  
-  <script type="text/javascript">$('#timepicker1').timepicker();$('#timepicker2').timepicker();</script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+  <script type="text/javascript">
+    $('#timepicker1').timepicker();
+    $('#timepicker2').timepicker();
+    $('#EditTimepicker1').timepicker();
+    $('#EditTimepicker2').timepicker();       
+  </script>
+  <script>
+    $(document).ready(function(){
+      var date_input=$('input[name="FechaN"]'); //our date input has the name "date"
+      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+      var options={
+        format: 'mm/dd/yyyy',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+      };
+      date_input.datepicker(options);
+    })
+</script>          
   
 </body>
 </html>

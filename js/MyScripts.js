@@ -1,9 +1,14 @@
+
+
+
 $("[name='lunes']").bootstrapSwitch();
 $("[name='martes']").bootstrapSwitch();
 $("[name='miercoles']").bootstrapSwitch();
 $("[name='jueves']").bootstrapSwitch();
 $("[name='viernes']").bootstrapSwitch();
 $("[name='sabado']").bootstrapSwitch();
+
+$("[name='VIH']").bootstrapSwitch();
 
 
 $('#ModalModificarUsuario').on('show.bs.modal', function (event) {
@@ -16,9 +21,6 @@ $('#ModalModificarUsuario').on('show.bs.modal', function (event) {
 	var telefono = button.data('telefono') 
 	var direccion = button.data('direccion') 
 	var turno = button.data('turnoid') 
-  	//var modal = $(this)
-  	//modal.find('#myModalLabel').text('Modificar Usuario: ' + id)
-  	//modal.find('.modal-body input').val(recipient)
   	$(event.currentTarget).find('#myModalLabel').text('Modificar Usuario: ' + id);
   	$(event.currentTarget).find('input[name="codigo"]').val(id);
   	$(event.currentTarget).find('input[name="nombres"]').val(nombre);
@@ -44,6 +46,20 @@ $('#ModalModificarTipoU').on('show.bs.modal', function (event) {
 })
 
 $('#ModalEliminarTipoU').on('show.bs.modal', function (event) {
+  	var button = $(event.relatedTarget)
+  	var id = button.data('id') 
+  	$(event.currentTarget).find('input[name="codigo"]').val(id);
+})	
+//---------------------------------------------------------------------------------------------------------------
+$('#ModalEditHorario').on('show.bs.modal', function (event) {
+  	var button = $(event.relatedTarget)
+  	var id = button.data('id') 
+  	var nombre = button.data('nombre')
+  	$(event.currentTarget).find('input[name="codigo"]').val(id);
+  	$(event.currentTarget).find('input[name="nombreHorario"]').val(nombre);
+})	
+
+$('#ModalEliminarHorario').on('show.bs.modal', function (event) {
   	var button = $(event.relatedTarget)
   	var id = button.data('id') 
   	$(event.currentTarget).find('input[name="codigo"]').val(id);

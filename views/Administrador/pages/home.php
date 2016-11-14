@@ -17,8 +17,6 @@
 	          	$fp     = fopen($imagen_temporal, 'r+b');
 	          	$data = fread($fp, filesize($imagen_temporal));
 	          	fclose($fp);
-        	  	$data = mysql_escape_string($data);
-
           	   	Pages::ingresarUsuario(trim($_POST['codigo']), trim($_POST['nombres']), trim($_POST['apellidos']), trim($_POST['tipoU']), trim($_POST['telefono']), trim($_POST['direccion']), trim($_POST['email']), trim($_POST['passWord']), trim($_POST['turno']), $data);
           	   	$errTyp = "success";
 				$errMSG = "Registro ingresado con éxito.";

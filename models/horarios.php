@@ -71,4 +71,20 @@
       return $list;
     }
   }
+
+  class actualizar{
+    
+    function __construct(){
+    }
+
+    public static function EditHorario($id, $nombre, $horario){
+      $db = Db::getInstance();
+      $result = $db->query('SELECT count(*) FROM detalleturnos');      
+    }   
+
+    public static function EliminarHorario($codigo){
+      $db = Db::getInstance();
+      $req = $db->query("DELETE FROM detalleturnos WHERE detalleturnoid = '$codigo'");
+    }
+  }
 ?>

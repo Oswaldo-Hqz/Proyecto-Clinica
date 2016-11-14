@@ -29,6 +29,10 @@
 	    		$controller = 'doctor';
 		    	$action     = 'home';
 	    	}
+	    	if ($_SESSION['Tipo'] == 'Asistente') {
+	    		$controller = 'asistente';
+		    	$action     = 'home';
+	    	}
 		}
 		require_once('views/layout.php');  
   	exit;

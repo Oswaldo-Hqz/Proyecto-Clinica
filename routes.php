@@ -37,6 +37,16 @@
           $controller = new DoctorController();
         break;        
       }                
+    }
+
+    if ($_SESSION['Tipo'] == 'Asistente') {
+      // crea una nueva instancia del controller necesario
+      switch($controller) {
+        case 'asistente':
+          require_once('models/asistente.php');
+          $controller = new AsistenteController();
+        break;        
+      }                
     } 
 
     $controller->{ $action }();
@@ -47,6 +57,8 @@
                        'horarios' => ['home', 'error'],
                        'doctores' => ['home', 'error'],
                        'posts' => ['index', 'show'],
+
+                       'asistente' => ['home', 'error'],
 
                        'doctor' => ['home', 'show'],
                        );
